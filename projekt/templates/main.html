@@ -1,0 +1,28 @@
+{% include 'common/header.html' %}
+{% load staticfiles %}
+{% block header %}
+<!-- nagłówek-->
+    <div class="rowMenu">   
+        <header style="background-image: url('{% static 'images/home.jpg' %}')">
+            <div id="menu">
+                {% include 'common/navigation.html' %}
+            </div>
+             <div class="row">
+                <div class="header-tekst">
+                    <div class="col-md-3"></div>
+                      <div class="col-md-6">
+                                ARTICLE BLOG                  
+                            </div>  
+                    <div class="col-md-3"></div>
+                </div>
+            </div>
+        </header>        
+    </div>
+{% endblock %}
+    </div>
+<div id="main-contener">
+    {% block main %}
+
+    {% endblock %}
+</div>
+{% include 'common/footer.html' %}
