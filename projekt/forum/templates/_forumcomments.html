@@ -1,0 +1,33 @@
+{% load staticfiles %}
+
+{% for comments in forumComments%}
+              <div class="row table-forum-comments forum-comments">
+                  {% if user.is_superuser %}
+                                <div id="comments-delete" onclick="deleteForumComments({{comments.id}});return false;">
+                                    <a href="#"><img src="{% static 'icons/delete.png' %}" /></a></div>
+                  {% endif %}
+
+                   <div class="col-md-10">
+                       <div class="row topic">
+                           {{comments.idforumtopic.topic}}
+                       </div>
+                       <div class="row date">
+                           {{comments.datetime}}
+                       </div>
+                            {{comments.comments}}
+                        </div>
+                  <div class="col-md-2">
+                      <div class="user-info">
+                           {{comments.auth_user.username}}
+                       </div>
+                       <div class="user-status">
+                            {% if comments.is_superuser == 1%}
+                                Admin
+                            {% else %}
+                                User
+                           {% endif %}
+                       </div>
+                  </div>
+              </div>
+
+ {% endfor %}

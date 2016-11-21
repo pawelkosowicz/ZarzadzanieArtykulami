@@ -1,0 +1,63 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+
+{% block header %}
+<!-- nagłówek-->
+    <div class="rowMenu">
+        <header style="background-image: url('{% static 'images/home.jpg' %}')">
+            <div id="menu">
+                 {% include 'common/navigation.html' %}
+            </div>
+             <div class="row">
+                <div class="header-tekst">
+                    <div class="col-md-3"></div>
+                      <div class="col-md-6">
+                                ARTICLE BLOG
+                            </div>
+                    <div class="col-md-3"></div>
+                </div>
+            </div>
+        </header>
+    </div>
+    </div>
+{% endblock %}
+
+{% block main %}
+<div class="row">
+<div class="one-third-column">
+     <div class="col-md-4"></div>
+      <div class="col-md-4">
+          <div class="row">
+              <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <form name="login-form" id="register-form" class="login-form" action="#" method="post">
+                            <div class="header">
+                            <h1>Register Form</h1>
+                            </div>
+                            <div class="content">
+                            <input name="email" id="email" type="email" class="input username" placeholder="email" required/>
+                            <input name="username" id="username" type="text" class="input password" placeholder="username" required/>
+                            <input name="password" id="password" type="password" class="input password" placeholder="password" required/>
+                            <input name="repeatPassword" id="repeatPassword" type="password" class="input password" placeholder="repeat password" required/>
+                            <div class="progress progress-striped active">
+                              <div id="jak_pstrength" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                            </div>
+                           {% csrf_token %}
+                            </div>
+                            <div class="errorRegister">
+
+                            </div>
+                            <div class="footer">
+                            <input type="submit" value="Register" id="register" class="belize-hole-flat-button">
+                            </div>
+
+                    </form>
+                </div>
+                <div class="col-md-2"></div>
+        </div>
+
+    </div>
+     <div class="col-md-4"></div>
+ </div>
+</div>
+{% endblock %}

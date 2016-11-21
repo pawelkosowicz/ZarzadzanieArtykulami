@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from django.apps import AppConfig
+
+# dodatki
+# pip install  --no-cache-dir django-user-roles
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,11 +29,10 @@ SECRET_KEY = 'a)3zo!rq@1i%14qzt4rs(ss(jfx(pd^k%#u*f1@(+&4_t16)&2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -80,20 +83,27 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'projekt.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'articles',
+        'NAME': 'artykuly',
 		'USER':'root',
 		'PASSWORD':'root',
 		'HOST':'localhost',
 		'PORT':'3306',
     }
 }
+
+#email sender
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_PORT=587
+EMAIL_HOST_USER='jkowalskitest88@gmail.com'
+EMAIL_HOST_PASSWORD='jkowalskitest'
+EMAIL_USE_TLS=True
 
 
 # Password validation

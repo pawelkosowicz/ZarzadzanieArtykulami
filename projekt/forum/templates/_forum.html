@@ -1,0 +1,23 @@
+{% for forum in forumList %}
+
+        <tr>
+              <td>
+                  <div class="commentsText">
+                        <div class="row"><a href="{% url 'topic' forum.id %}">{{ forum.topic}}</a></div>
+                        <div class="row">{{ forum.description}}</div>
+                   </div>
+              </td>
+
+              <td>
+                   <div class="postCount">{{ forum.postcount}}</div>
+               </td>
+              <td>
+                  <div class="lastPost">{{forum.username}} {{ forum.lastPost}}</div>
+              </td>
+            <td>
+                <div id="forum-topic-delete" onClick="deleteForumTopic({{forum.id}});return false;"><a  href="#"><img src="{% static 'icons/delete.png' %}" /></a></div>
+
+            </td>
+        </tr>
+
+        {%endfor%}

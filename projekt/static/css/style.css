@@ -40,13 +40,13 @@ HEADER
 *******************/
 
 .login-form .header {
-	padding: 0px 0px 10px 20px;
+	padding: 0px 0px 10px 0px;
 }
 
 .login-form .header h1 {
 	font-family: 'Bree Serif', serif;
 	font-weight: 300;
-	font-size: 28px;
+    text-align:center;
 	line-height:34px;
 	color: #414848;
 	text-shadow: 1px 1px 0 rgba(256,256,256,1.0);
@@ -149,8 +149,19 @@ CONTENT
 FOOTER
 *******************/
 
+#register-form .belize-hole-flat-button{
+    background-color: #337ab7;
+    color:whitesmoke;
+
+}
+
+#login-form .belize-hole-flat-button{
+    background-color: #337ab7;
+    color:whitesmoke;
+
+}
+
 .login-form .footer {
-	padding: 10px 20px 10px 10px;
 	overflow: auto;
 	
 	background: #d4dedf;

@@ -33,20 +33,19 @@
 
                     <form name="login-form" id="login-form" class="login-form" method="post">
                             <div class="header">
-                            <h1>Login Form</h1>		
+                            <h1>Login Form</h1>
                             </div>
                             <div class="content">
                                 {% csrf_token %}
-                            <input name="email" id="email" type="email" class="input username" placeholder="email" />
-                            <input name="password" id="password" type="password" class="input password" placeholder="Password" />
+                            <input name="username" id="username" type="username" class="input username" placeholder="username" required/>
+                            <input name="password" id="password" type="password" class="input password" placeholder="password" required/>
                             </div>
                             <div class="errorLogin">
 
                             </div>
                             <div class="footer">
-                                <div class="row">
-                            <input type="submit" name="submit" value="Login" class="button"/>
-                                </div>   
+                                    <input type="submit" value="Login" id="Login" class="belize-hole-flat-button">
+
                                 <div class="text">Nie masz konta?</div><input type="button" name="submit" value="Dołącz do nas" id="registerpage" class="register" />	
                                 
                             </div>

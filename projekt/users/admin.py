@@ -1,5 +1,5 @@
 from django.contrib import admin
-from articles.models import Users
 # Register your models here.
+from articles.models import AuthUser
 
-admin.site.register(Users)
+

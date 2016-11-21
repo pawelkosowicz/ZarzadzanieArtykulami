@@ -1,0 +1,106 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+
+{% block header %}
+<!-- nagłówek-->
+    <div class="rowMenu">
+        <header style="background-image: url('{% static 'images/home.jpg' %}')">
+            <div id="menu">
+                 {% include 'common/navigation.html' %}
+            </div>
+             <div class="row">
+                <div class="header-tekst">
+                    <div class="col-md-3"></div>
+                      <div class="col-md-6">
+
+                                FORUM
+                            </div>
+                    <div class="col-md-3"></div>
+                </div>
+            </div>
+        </header>
+    </div>
+    </div>
+{% endblock %}
+
+
+{% block main %}
+
+
+<div class="row">
+    <div class="row forum-comments-title">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 title-comments">{{forumComments.0.idforumtopic.topic}}</div>
+        <div class="col-md-3"></div>
+        </div>
+<div class="one-third-column">
+     <div class="col-md-3"></div>
+      <div class="col-md-6">
+
+
+        <div class ="comments-forum">
+              {% for comments in forumComments%}
+              <div class="row table-forum-comments forum-comments">
+                  {% if user.is_superuser %}
+                                <div id="comments-delete" onclick="deleteForumComments({{comments.id}});return false;">
+                                    <a href="#"><img src="{% static 'icons/delete.png' %}" /></a></div>
+                  {% endif %}
+
+                   <div class="col-md-10">
+                       <div class="row topic">
+                           {{comments.idforumtopic.topic}}
+                       </div>
+                       <div class="row date">
+                           {{comments.datetime}}
+                       </div>
+                            {{comments.comments}}
+                        </div>
+                  <div class="col-md-2">
+                      <div class="user-info">
+                           {{comments.auth_user.username}}
+                       </div>
+                       <div class="user-status">
+                            {% if comments.auth_user.is_superuser == 1%}
+                                Admin
+                            {% else %}
+                                User
+                           {% endif %}
+                       </div>
+                  </div>
+              </div>
+
+              {% endfor %}
+        </div>
+            {% if user.is_authenticated %}
+              <div class="row">
+                        Dodaj komentarz<br/>
+                        <textarea class ="textarea-common" ></textarea>
+                        <div class="row">
+                            <div class="col-md-10"></div>
+                            <div class="col-md-2">
+                                <div class="button-contact">
+
+                                    <input type="submit" value="Dodaj" id="addForumComment" class="belize-hole-flat-button">
+
+
+                                </div>
+                            </div>
+                        </div>
+                </div>
+          {% else %}
+             <div class="row">
+                        <div class="col-md-3"></div>
+                            <div class="col-md-6 commentsAlert">
+                                Zaloguj się aby dodać komentarz
+                            </div>
+                        <div class="col-md-3"></div>
+                     </div>
+          {% endif %}
+
+
+
+    </div>
+     <div class="col-md-3"></div>
+ </div>
+</div>
+{% endblock %}

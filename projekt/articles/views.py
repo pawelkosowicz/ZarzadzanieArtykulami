@@ -1,7 +1,12 @@
+from django.shortcuts import render
+from django.views import View
+
 from models import News
 from django.views.generic import TemplateView,DetailView,ListView
 
 # klasa zwracajaca statyczny widok wraz z lista danych
+
+
 class Main(ListView):
     template_name = 'news.html'
     model = News
@@ -9,15 +14,26 @@ class Main(ListView):
     def get_context_data(self, **kwargs):
        # context = super(Main, self).get_context_data(**kwargs)
        # context['news'] = News.objects.all()
-        return {'news':News.objects.all()}
+        return {'news':News.objects.all()[:5]}
+
+
+class OldNews(ListView):
+    template_name = '_news.html'
+    model = News
+    news=5
+    maxNews=5
+
+    def post(self,request):
+        OldNews.news+=OldNews.maxNews
+        return render(request,OldNews.template_name,{'news':News.objects.all()[:OldNews.news]})
 
 
 
-class Article(DetailView):
-    template_name = 'news.html'
+class Articles(View):
 
-    def news(self):
-        return {'news': News.objects.all()}
+    def post(self, request):
+        return render(request, '_news.html', {'news':News.objects.all})
+
 
 # klasa zwracajaca szczegolowy widok artykulu wraz z modelem jako parametr pobiera id artykulu
 class SingleArticle(DetailView):
