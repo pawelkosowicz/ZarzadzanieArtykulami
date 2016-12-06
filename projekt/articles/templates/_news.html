@@ -1,9 +1,13 @@
-
+{% load staticfiles %}
 {% for article in news%}
         <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6 news">    
-				
+			 {% if user.is_superuser %}
+                  <div id="news_delete" onClick="deleteNews({{ article.id}});return false;"><a href="#"><img src="{% static 'icons/delete.png' %}" /></a></div>
+                  <div id="news_edit" onClick="showEditNewsDialog({{ article.id}});return false;"><a href="#"><img src="{% static 'icons/edit.png' %}" /></a></div>
+                  <div id="news_add" onClick="showAddNewsDialog();return false;"><a  href="#"><img src="{% static 'icons/add.png' %}" /></a></div>
+            {% endif %}
             <a href="{% url 'post' article.id %}">
                 <div class="title">
                    {{ article.title}}
@@ -13,7 +17,7 @@
                 </div>
              </a>
             <div class="author">
-                Posted by {{ article.auth_user.first_name}}  on  {{ article.datatime}}
+                Posted by {{ article.auth_user.username}}  on  {{ article.datatime}}
             </div>
            
         </div>    

@@ -8,5 +8,6 @@ urlpatterns = [
     url(r'^/getComments/$',views.ForumGetComments.as_view(), name='getComments'),
     url(r'^/deleteTopic/$',views.ForumDeleteTopic.as_view(), name='deleteTopic'),
     url(r'^/getTopic/$',views.ForumGetTopic.as_view(), name='getTopic'),
+    url(r'^/addTopic/$',views.ForumAddTopic.as_view(),name='addTopic'),
     url(r'^/deleteComment/$', views.ForumDeleteComment.as_view(), name='deleteComment'),
 ]

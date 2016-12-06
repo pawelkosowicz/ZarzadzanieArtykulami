@@ -1,14 +1,22 @@
 {% extends 'main.html' %}
-
+{% load staticfiles %}
 {% block main %}
+
+
+
 
   <div id="news">
 {% for article in news%}
-        <div class="row">
+      <div class="row">
         <div class="col-md-3"></div>
-        <div class="col-md-6 news">    
-				
+        <div class="col-md-6 news">
+            {% if user.is_superuser %}
+                  <div id="news_delete" onClick="deleteNews({{ article.id}});return false;"><a href="#"><img src="{% static 'icons/delete.png' %}" /></a></div>
+                  <div id="news_edit" onClick="showEditNewsDialog({{ article.id}});return false;"><a href="#"><img src="{% static 'icons/edit.png' %}" /></a></div>
+                  <div id="news_add" onClick="showAddNewsDialog();return false;"><a  href="#"><img src="{% static 'icons/add.png' %}" /></a></div>
+            {% endif %}
             <a href="{% url 'post' article.id %}">
+
                 <div class="title">
                    {{ article.title}}
                 </div>
@@ -36,5 +44,72 @@
         </div>
          <div class="col-md-3"></div>
      </div>
+    </div>
+
+<div id="edit_news_dialog" class="modal">
+        <div class="modal-dialog animated">
+            <div class="modal-content">
+                <form class="form-horizontal" id="add_news_form" method="post">
+                    <div class="modal-header">
+                        <strong>Edytuj artykuł</strong>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="add_news_label control-label col-md-3 ">Tytuł</label>
+                            <div class="input-group col-md-8">
+                                <input type="text" name="title" id="edit_news_title" class="form-control" />
+                            </div>
+
+                        </div>
+                         <div class="form-group">
+                            <label class=" add_news_label control-label col-md-3">Krótki opis</label>
+                            <div class="input-group col-md-8">
+                                <input type="text" name="short_title" id="edit_news_short_title" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-default" type="button" onclick="modal.close();">Anuluj</button>
+                        <input type="button" class="btn btn-primary" name="submit" value="Zapisz" id="edit_news" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+ <div id="add_news_dialog" class="modal">
+        <div class="modal-dialog animated">
+            <div class="modal-content">
+                <form class="form-horizontal" id="add_news_form" method="post">
+                    <div class="modal-header">
+                        <strong>Dodaj artykuł</strong>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="add_news_label control-label col-md-3 ">Tytuł</label>
+                            <div class="input-group col-md-8">
+                                <input type="text" name="title" id="add_news_title" class="form-control" />
+                            </div>
+
+                        </div>
+                         <div class="form-group">
+                            <label class=" add_news_label control-label col-md-3">Krótki opis</label>
+                            <div class="input-group col-md-8">
+                                <input type="text" name="short_title" id="add_news_short_title" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-default" type="button" onclick="modal.close();">Anuluj</button>
+                        <input type="button" class="btn btn-primary" name="submit" value="Zapisz" id="save_news" />
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 {% endblock %}

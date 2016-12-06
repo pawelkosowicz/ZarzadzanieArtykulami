@@ -2,6 +2,7 @@ from _mysql_exceptions import DatabaseError
 from django.contrib.auth.decorators import login_required
 from django.db.models import Model
 from django.http import HttpResponse
+from django.http import JsonResponse
 from django.shortcuts import render
 
 # Create your views here.
@@ -153,7 +154,7 @@ class ForumGetTopic(ListView):
                 forum.lastPost = comments[0].datetime
             forumList.append(forum)
 
-            return render(request, '_forum.html', {'forumList': forumList})
+        return render(request, '_forum.html', {'forumList': forumList})
 
 class ForumTopic(Model):
     id = 0
@@ -163,4 +164,16 @@ class ForumTopic(Model):
     lastPost = ''
     username = ''
 
+
+class ForumAddTopic(View):
+
+    def post(self,request):
+        title = request.POST['title']
+        description = request.POST['description']
+        try:
+            forum = Forumtopics(topic=title,description=description,postcount=0)
+            forum.save()
+            return JsonResponse({'response':'OK'})
+        except DatabaseError:
+            return JsonResponse({'response': 'FAIL'})
 

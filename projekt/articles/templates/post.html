@@ -44,29 +44,31 @@
                     <input type="submit" value="Zapisz" id="saveMessage" class="belize-hole-flat-button" onClick="updatePost();return false;">
 
                </div>
-
+                {% if user.is_superuser %}
+                <div id="news_add" onClick="showAddPostDialog();return false;"><a  href="#"><img src="{% static 'icons/add_news.png' %}" /></a></div>
+                {% endif %}
                 <div class="longPost">
-                {{news.longnews}}
+                {{news.longnews|safe}}
                 </div>
             </div>
         <div class="col-md-3"></div>
     </div>
+    {% if user.is_authenticated %}
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 comments">
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    {% else %}
+        <div class="row">
+            <div class="col-md-3"></div>
 
-                    <div class="row">
-                        <div class="col-md-3"></div>
-                            <div class="col-md-6 comments">
-                            </div>
-                        <div class="col-md-3"></div>
-                    </div>
+            <div class="col-md-6 commentsAlert">
+                Zaloguj się aby dodać komentarz
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    {% endif%}
 
-                    {% if not user.is_authenticated %}
-                       <div class="row">
-                            <div class="col-md-3"></div>
-
-                                <div class="col-md-6 commentsAlert">
-                                    Zaloguj się aby dodać komentarz
-                                </div>
-                            <div class="col-md-3"></div>
-                       </div>
-                    {% endif%}
  {% endblock %}

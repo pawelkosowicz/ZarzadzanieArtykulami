@@ -33,7 +33,6 @@ class LoginView(View):
             print("Invalid login details: {0}, {1}".format(username, password))
             return HttpResponseRedirect('/mvc-application/login/')
 
-
     def get(self, request):
         if request.user.is_authenticated():
             return HttpResponseRedirect('/mvc-application/')
