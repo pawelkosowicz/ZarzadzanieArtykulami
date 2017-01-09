@@ -25,6 +25,8 @@ class LoginView(View):
         user = authenticate(username=username, password=password)
         if user:
             if user.is_active:
+                # wylogowanie po 15min w przypadku braku aktywnosci
+                request.session.set_expiry(900)
                 login(request, user)
                 return HttpResponseRedirect('/mvc-application/')
             else:
@@ -77,16 +79,6 @@ class RegisterView(View):
         server.sendmail(username, email, msg)
         server.quit()
 
-
-
-        '''
-        send_mail(
-            'Rejestracja zakończona pomyślnie!',
-            'Twoje konto o loginie '+username+' zostalo stworzone!',
-            settings.EMAIL_HOST_USER,
-            [email]
-        )
-        '''
 
     def get(self,request):
         if request.user.is_authenticated():
